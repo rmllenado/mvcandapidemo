@@ -44,7 +44,7 @@ namespace Mvc.Controllers
             using (HttpClient client = new HttpClient())
             {
                 client.BaseAddress = new Uri(_configuration["Apis:WeatherApi:Url"]);
-                var results = await client.GetStringAsync("weatherforecast");
+                var results = await client.GetStringAsync("/weatherforecast");
                 ViewBag.Json = JArray.Parse(results).ToString();
                 return View();
             }
