@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
@@ -42,11 +43,15 @@ namespace Mvc
                     failureStatus: HealthStatus.Degraded,
                     timeout: new TimeSpan(0, 0, 5)
                     )
-                .AddCheck(name: "File Path Health Check",
-                    instance: new FilePathWriteHealthCheck(Configuration["SecurityLogFilePath"]),
-                    failureStatus: HealthStatus.Unhealthy,
-                    tags: new[] { "ready" }
-                    );
+                .AddFilePathWrite(Configuration["SecurityLogFilePath"]
+                    , HealthStatus.Unhealthy, new[] { "ready" });
+            //.AddCheck(name: "File Path Health Check",
+            //    instance: new FilePathWriteHealthCheck(Configuration["SecurityLogFilePath"]),
+            //    failureStatus: HealthStatus.Unhealthy,
+            //    tags: new[] { "ready" }
+            //    );
+
+            services.AddHealthChecksUI();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -79,7 +84,8 @@ namespace Mvc
                         [HealthStatus.Unhealthy] = StatusCodes.Status503ServiceUnavailable,
                     },
                     ResponseWriter = WriteHealthCheckReadyResponse,
-                    Predicate = (check) => check.Tags.Contains("ready")
+                    Predicate = (check) => check.Tags.Contains("ready"),
+                    AllowCachingResponses = false
                 });
                 endpoints.MapHealthChecks("/health/live", new HealthCheckOptions()
                 {
@@ -89,12 +95,21 @@ namespace Mvc
                         [HealthStatus.Unhealthy] = StatusCodes.Status503ServiceUnavailable,
                     },
                     ResponseWriter = WriteHealthCheckLiveResponse,
-                    Predicate = (check) => !check.Tags.Contains("ready")
+                    Predicate = (check) => !check.Tags.Contains("ready"),
+                    AllowCachingResponses = false
+                });
+                endpoints.MapHealthChecks("/healthui", new HealthCheckOptions()
+                {
+                    Predicate = _ => true,
+                    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse,
+                    AllowCachingResponses = false
                 });
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            app.UseHealthChecksUI();
         }
 
         private Task WriteHealthCheckLiveResponse(HttpContext httpContext, HealthReport result)
