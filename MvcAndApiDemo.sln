@@ -15,6 +15,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Webforms", "Webforms\Webforms.csproj", "{E10C72AD-E025-4460-AC30-35F1DF313B69}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebformsWithLogging", "WebformsWithLogging\WebformsWithLogging.csproj", "{0A9DBA65-C28E-44CB-9C00-1E532E095C08}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebformsWithLogging45", "WebformsWithLogging45\WebformsWithLogging45.csproj", "{82949F17-A17C-46C4-B3DE-50C0D053FB40}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +37,14 @@ Global
 		{E10C72AD-E025-4460-AC30-35F1DF313B69}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E10C72AD-E025-4460-AC30-35F1DF313B69}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E10C72AD-E025-4460-AC30-35F1DF313B69}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A9DBA65-C28E-44CB-9C00-1E532E095C08}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A9DBA65-C28E-44CB-9C00-1E532E095C08}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A9DBA65-C28E-44CB-9C00-1E532E095C08}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A9DBA65-C28E-44CB-9C00-1E532E095C08}.Release|Any CPU.Build.0 = Release|Any CPU
+		{82949F17-A17C-46C4-B3DE-50C0D053FB40}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82949F17-A17C-46C4-B3DE-50C0D053FB40}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{82949F17-A17C-46C4-B3DE-50C0D053FB40}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{82949F17-A17C-46C4-B3DE-50C0D053FB40}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
